@@ -10,7 +10,6 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.util.StringUtils;
 
 
 import java.util.*;
@@ -392,7 +391,7 @@ public abstract class DefaultDaoImpl implements ICommonDao {
     @Override
     public <PK, T> List<T> getListByField(List<PK> key, String field, Class<T> clzss) {
         String fieldColumnName = RowBeanMapper.underscoreName(field);
-        if (StringUtils.isEmpty(fieldColumnName)) {
+        if (fieldColumnName == null || fieldColumnName.trim().isEmpty()) {
             throw new IllegalArgumentException(" field not mapping to column ");
         }
         Map<String, Object> paramsObj = new HashMap();

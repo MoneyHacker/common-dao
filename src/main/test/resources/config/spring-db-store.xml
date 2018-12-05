@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd "
+	   >
+	<!-- 配置内容数据库开始 -->
+	<!-- 配置内容主库数据源 -->
+	<bean id="store_master_dataSource" parent="parentDataSource">
+		<property name="jdbcUrl">
+			<value>${store.master.jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${store.master.jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${store.master.jdbc.password}</value>
+		</property>
+	</bean>
+
+	<!-- 配置内容从库数据源 -->
+	<bean id="store_slave_dataSource" parent="parentDataSource">
+		<property name="jdbcUrl">
+			<value>${store.slave.jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${store.slave.jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${store.slave.jdbc.password}</value>
+		</property>
+	</bean>
+
+	<bean id="storeJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="store_master_dataSource"/>
+	</bean>
+
+	<bean id="storeJdbcQueryTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="store_slave_dataSource"/>
+	</bean>
+
+	<!-- 只在主库上有事务配置 -->
+	<bean id="storeTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="store_master_dataSource" />
+	</bean>
+	<!-- 只在主库上有事务配置 -->
+	<bean id="storeSlaveTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="store_slave_dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="storeTransactionManager" />
+	<tx:annotation-driven transaction-manager="storeSlaveTransactionManager" />
+
+	<!-- 配置内容查询数据库 -->
+	<bean id="store_slave_sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="store_slave_dataSource" />
+		<property name="configLocation" value="classpath:/cmsXml/sql-map-config.xml" />
+		<property name="mapperLocations" value="classpath*:/cmsXml/mapper/*.xml" />
+	</bean>
+
+
+	<!-- 配置内容事物数据库 -->
+	<bean id="store_master_sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="store_master_dataSource" />
+		<property name="configLocation" value="classpath:/cmsXml/sql-map-config.xml" />
+		<property name="mapperLocations" value="classpath*:/cmsXml/mapper/*.xml" />
+	</bean>
+
+	<bean id="store_master_sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="store_master_sqlSessionFactory" />
+	</bean>
+
+	<bean id="store_slave_sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="store_slave_sqlSessionFactory" />
+	</bean>
+
+	<!-- 配置相应的Dao 和Service-->
+	<bean id ="storeCommonDao"  class="com.simple.frame.dao.spi.impl.CommonDaoImpl">
+		<property name="sqlSession" ref="store_master_sqlSession" />
+		<property name="sqlSessionQuery" ref="store_slave_sqlSession" />
+		<property name="jdbcTemplate" ref="storeJdbcTemplate" />
+		<property name="queryJdbcTemplate" ref="storeJdbcQueryTemplate" />
+	</bean>
+
+	<bean id ="storeCommonService"  class="com.simple.frame.dao.service.impl.CommonServiceImpl">
+		<property name="commonDao" ref="storeCommonDao" />
+	</bean>
+	<!-- 配置内容数据库结束 -->
+</beans>

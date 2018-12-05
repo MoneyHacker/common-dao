@@ -1,8 +1,14 @@
 package com.simple.frame.dao.jdbc.handler;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.*;
+
+import com.sun.corba.se.impl.io.TypeMismatchException;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.NotWritablePropertyException;
+import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,6 +28,7 @@ import java.util.*;
  * @date   2015年7月8日 下午1:43:27
  * copy from  BeanPropertyRowMapper
  */
+@Slf4j
 public class RowBeanMapper<T> implements RowMapper<T> {
 
 
@@ -84,7 +91,7 @@ public class RowBeanMapper<T> implements RowMapper<T> {
 		}
 		else {
 			if (!this.mappedClass.equals(mappedClass)) {
-				throw new InvalidDataAccessApiUsageException("The mapped class can not be reassigned to map to " +
+				throw new RuntimeException("The mapped class can not be reassigned to map to " +
 						mappedClass + " since it is already providing mapping for " + this.mappedClass);
 			}
 		}
@@ -208,7 +215,7 @@ public class RowBeanMapper<T> implements RowMapper<T> {
 		Objects.requireNonNull(this.mappedClass, "Mapped class was not specified");
 		//创建对应的Bean 对象
 		T mappedObject = BeanUtils.instantiate(this.mappedClass);
-		BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(mappedObject);
+		BeanWrapper bw = (BeanWrapper) PropertyAccessorFactory.forBeanPropertyAccess(mappedObject);
 		initBeanWrapper(bw);
 
 		ResultSetMetaData rsmd = rs.getMetaData();
@@ -244,14 +251,14 @@ public class RowBeanMapper<T> implements RowMapper<T> {
 					}
 				}
 				catch (NotWritablePropertyException ex) {
-					throw new DataRetrievalFailureException(
+					throw new RuntimeException(
 							"Unable to map column " + column + " to property " + pd.getName(), ex);
 				}
 			}
 		}
 
 		if (populatedProperties != null && !populatedProperties.equals(this.mappedProperties)) {
-			throw new InvalidDataAccessApiUsageException("Given ResultSet does not contain all fields " +
+			throw new RuntimeException("Given ResultSet does not contain all fields " +
 					"necessary to populate object of class [" + this.mappedClass + "]: " + this.mappedProperties);
 		}
 

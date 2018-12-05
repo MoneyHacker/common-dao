@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting value="true" name="cacheEnabled"/>
+        <setting value="false" name="lazyLoadingEnabled"/>
+        <setting value="true" name="multipleResultSetsEnabled"/>
+        <setting value="true" name="useColumnLabel"/>
+        <setting value="false" name="useGeneratedKeys"/>
+        <setting value="SIMPLE" name="defaultExecutorType"/>
+        <setting value="25000" name="defaultStatementTimeout"/>
+    </settings>
+
+    <plugins>
+        <plugin interceptor="com.simple.frame.dao.interceptor.TimerInterceptor">
+            <property name="showSql" value="true"/>
+            <property name="longQueryTimeMillis" value="2000"/>
+        </plugin>
+    </plugins>
+</configuration>

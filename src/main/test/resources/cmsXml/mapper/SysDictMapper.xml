@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SysDictMapper">
+	<resultMap id="BaseResultMap" type="com.simple.module.SysDict">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="parent_id" property="parentId" jdbcType="BIGINT" />
+		<result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
+		<result column="sort" property="sort" jdbcType="SMALLINT" />
+		<result column="dict_code" property="dictCode" jdbcType="VARCHAR" />
+		<result column="dict_name" property="dictName" jdbcType="VARCHAR" />
+		<result column="dict_value" property="dictValue" jdbcType="VARCHAR" />
+		<result column="editable" property="editable" jdbcType="TINYINT" />
+		<result column="active" property="active" jdbcType="TINYINT" />
+		<result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="id != null"> and id= #{id}</if>	
+		<if test="parentId != null"> and parent_id= #{parentId}</if>	
+		<if test="parentIds != null and parentIds !=''"> and parent_ids= #{parentIds}</if>
+		<if test="sort != null"> and sort= #{sort}</if>	
+		<if test="dictCode != null and dictCode !=''"> and dict_code= #{dictCode}</if>
+		<if test="dictName != null and dictName !=''"> and dict_name= #{dictName}</if>
+		<if test="dictValue != null and dictValue !=''"> and dict_value= #{dictValue}</if>
+		<if test="editable != null"> and editable= #{editable}</if>	
+		<if test="active != null"> and active= #{active}</if>	
+		<if test="createUserId != null and createUserId !=''"> and create_user_id= #{createUserId}</if>
+		<if test="createTime != null"> and create_time= #{createTime}</if>	
+		<if test="updateUserId != null and updateUserId !=''"> and update_user_id= #{updateUserId}</if>
+		<if test="updateTime != null"> and update_time= #{updateTime}</if>	
+		<if test="remark != null and remark !=''"> and remark= #{remark}</if>
+	</sql>
+	<sql id="Base_Column_List">
+		id ,
+		parent_id ,
+		parent_ids ,
+		sort ,
+		dict_code ,
+		dict_name ,
+		dict_value ,
+		editable ,
+		active ,
+		create_user_id ,
+		create_time ,
+		update_user_id ,
+		update_time ,
+		remark 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from sys_dict
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from sys_dict
+		where
+		id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.simple.module.SysDict">
+		insert into sys_dict
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>	
+			<if test="parentId != null">parent_id,</if>	
+			<if test="parentIds != null and parentIds !=''">parent_ids,</if>
+			<if test="sort != null">sort,</if>	
+			<if test="dictCode != null and dictCode !=''">dict_code,</if>
+			<if test="dictName != null and dictName !=''">dict_name,</if>
+			<if test="dictValue != null and dictValue !=''">dict_value,</if>
+			<if test="editable != null">editable,</if>	
+			<if test="active != null">active,</if>	
+			<if test="createUserId != null and createUserId !=''">create_user_id,</if>
+			<if test="createTime != null">create_time,</if>	
+			<if test="updateUserId != null and updateUserId !=''">update_user_id,</if>
+			<if test="updateTime != null">update_time,</if>	
+			<if test="remark != null and remark !=''">remark,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=BIGINT},
+			</if>
+			<if test="parentIds != null and parentIds !=''">
+				#{parentIds,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=SMALLINT},
+			</if>
+			<if test="dictCode != null and dictCode !=''">
+				#{dictCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dictName != null and dictName !=''">
+				#{dictName,jdbcType=VARCHAR},
+			</if>
+			<if test="dictValue != null and dictValue !=''">
+				#{dictValue,jdbcType=VARCHAR},
+			</if>
+			<if test="editable != null">
+				#{editable,jdbcType=TINYINT},
+			</if>
+			<if test="active != null">
+				#{active,jdbcType=TINYINT},
+			</if>
+			<if test="createUserId != null and createUserId !=''">
+				#{createUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUserId != null and updateUserId !=''">
+				#{updateUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null and remark !=''">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+<insert id="insertBatch" parameterType="java.util.List">
+	insert into sys_dict (
+			id ,parent_id ,parent_ids ,sort ,dict_code ,dict_name ,dict_value ,editable ,active ,create_user_id ,create_time ,update_user_id ,update_time ,remark )
+		values
+	<foreach collection="list" item="item" index="index" separator="," >
+	(
+	#{item.id},
+	
+	#{item.parentId},
+	
+	#{item.parentIds},
+	
+	#{item.sort},
+	
+	#{item.dictCode},
+	
+	#{item.dictName},
+	
+	#{item.dictValue},
+	
+	#{item.editable},
+	
+	#{item.active},
+	
+	#{item.createUserId},
+	
+	#{item.createTime},
+	
+	#{item.updateUserId},
+	
+	#{item.updateTime},
+	
+	#{item.remark}
+	)
+	</foreach>
+</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.simple.module.SysDict">
+		update sys_dict
+		<set>
+			<if test="parentId != null">
+				parent_id= #{parentId,jdbcType=BIGINT},
+			</if>
+			<if test="parentIds != null and parentIds !=''">
+				parent_ids= #{parentIds,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				sort= #{sort,jdbcType=SMALLINT},
+			</if>
+			<if test="dictCode != null and dictCode !=''">
+				dict_code= #{dictCode,jdbcType=VARCHAR},
+			</if>
+			<if test="dictName != null and dictName !=''">
+				dict_name= #{dictName,jdbcType=VARCHAR},
+			</if>
+			<if test="dictValue != null and dictValue !=''">
+				dict_value= #{dictValue,jdbcType=VARCHAR},
+			</if>
+			<if test="editable != null">
+				editable= #{editable,jdbcType=TINYINT},
+			</if>
+			<if test="active != null">
+				active= #{active,jdbcType=TINYINT},
+			</if>
+			<if test="createUserId != null and createUserId !=''">
+				create_user_id= #{createUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateUserId != null and updateUserId !=''">
+				update_user_id= #{updateUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time= #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null and remark !=''">
+				remark= #{remark,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sys_dict where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageCount" resultType="java.lang.Integer" parameterType="map">
+		select count(1) from sys_dict where 1=1
+		<include refid="Base_Where" />
+	</select>
+	<select id="pageData" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sys_dict where 1=1
+		<include refid="Base_Where" />
+	</select>
+
+	<select id="selectByIds" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_dict where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	 <delete id="deleteByMap" parameterType="map" >
+  		delete from sys_dict where 1=1 <include refid="Base_Where" />
+ 	 </delete>
+  
+  <delete id="deleteByIds"  parameterType="map">
+		delete from sys_dict where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+<select id="selectByField" resultMap="BaseResultMap">
+select <include refid="Base_Column_List" /> from sys_dict where ${_fieldName} in
+ <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	 #{item}
+ </foreach>
+</select>
+
+<select id="getMinIdAndMaxId" resultType="map" parameterType="map">
+select
+min(id) minId, max(id) maxId
+from sys_dict where 1=1   <include refid="Base_Where"/>
+</select>
+
+ <!-- 根据分页参数和其它条件,通过id获取分页数据,只通过主键大于 ,而没有用between,避免查询到空数据  order by 主键升序  -->
+
+<select id="getDataList" resultMap="BaseResultMap" parameterType="map">
+select
+<include refid="Base_Column_List"/>
+from sys_dict where
+id <![CDATA[ >= ]]> #{startIndex}
+<include refid="Base_Where"/>
+   order by  id  asc
+        limit  #{batchSize}
+</select>
+</mapper>
