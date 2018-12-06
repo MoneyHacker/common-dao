@@ -4,7 +4,10 @@
 具体暴露接口,可查看IMapper类,可使用内置方法,也可添加自定义SQL
 
 
- @Resource
+ /**
+     * 一个链接可以查所有表
+     */
+    @Resource
     private ICommonDao commonDao;
 
     /**
@@ -14,7 +17,7 @@
     public void test() {
         SysUser user = commonDao.get(1L, SysUser.class);
         Assert.assertNotNull(user);
-        //根据置sql查询
+        //根据内置sql查询,按条件查询
         user = commonDao.get(SysUser.class,"userName","aaa");
         Assert.assertNotNull(user);
         //根据自己定义sql查询,sqlId是在xml的sqlId
