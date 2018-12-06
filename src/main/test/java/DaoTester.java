@@ -13,6 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class) //使用junit4进行测试
@@ -29,10 +31,21 @@ public class DaoTester {
      */
     @Resource
     private ICommonDao commonDao;
+
+    /**
+     * 其它CURD方法差不多,具体可以看IMapper接口
+     */
     @Test
     public void test() {
         SysUser user = commonDao.get(1L, SysUser.class);
         Assert.assertNotNull(user);
+        //根据置sql查询
+        user = commonDao.get(SysUser.class,"userName","aaa");
+        Assert.assertNotNull(user);
+        //根据自己定义sql查询,sqlId是在xml的sqlId
+        List<SysUser> userList =  commonDao.getListBySqlId(SysUser.class, "selectByIds","list", Arrays.asList(1L,2L));
+        Assert.assertNotNull(userList);
+
     }
     @Test
     public void testDict() {
