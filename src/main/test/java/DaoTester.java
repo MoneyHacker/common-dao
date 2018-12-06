@@ -39,7 +39,7 @@ public class DaoTester {
     public void test() {
         SysUser user = commonDao.get(1L, SysUser.class);
         Assert.assertNotNull(user);
-        //根据置sql查询
+        //根据内置sql查询,按条件查询
         user = commonDao.get(SysUser.class,"userName","aaa");
         Assert.assertNotNull(user);
         //根据自己定义sql查询,sqlId是在xml的sqlId
