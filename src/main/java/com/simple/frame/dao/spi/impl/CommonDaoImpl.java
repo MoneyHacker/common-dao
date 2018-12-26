@@ -29,11 +29,21 @@ public class CommonDaoImpl extends DefaultDaoImpl {
     }
 
 
-
+    @Override
     public  void setSqlSessionQuery(SqlSessionTemplate sqlSessionQuery){
         this.sqlSessionQuery = sqlSessionQuery;
     }
 
+    @Override
+    public void setJdbcTemplateQuery(JdbcTemplate jdbcTemplate) {
+        this.queryJdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    @Override
     public  void setSqlSession(SqlSessionTemplate sqlSession){
         this.sqlSession = sqlSession;
     }

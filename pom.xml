@@ -6,7 +6,7 @@
     <groupId>com.simple.frame</groupId>
     <artifactId>com.simple.frame.dao</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <description>通用Dao</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
