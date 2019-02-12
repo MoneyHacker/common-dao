@@ -1,10 +1,16 @@
 package com.simple.frame.dao.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import java.io.Serializable;
 
 /**
  * 
  */
+@Getter
+@Setter
+@ToString
 public class Query implements Serializable{
 
 	/**
@@ -23,9 +29,9 @@ public class Query implements Serializable{
 	private boolean isAsc;
 
 	/**
-	 * 跳转
+	 * 当面页码,从1开始
 	 */
-	private int page=1;
+	private Integer pageIndex = 1;
 	
 	//开始记录索引
 	private int offset = 0;
@@ -33,13 +39,13 @@ public class Query implements Serializable{
 	/**
 	 * 每页显示记录数
 	 */
-	private int pageSize = 15;
+	private Integer pageSize = 15;
 
+	private OrderType orderType;
 	public Query() {
-
 	}
 
-	public Query(int pageSize) {
+	public Query(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
 
@@ -48,37 +54,8 @@ public class Query implements Serializable{
 		return order;
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
-	}
-
-	public boolean getIsAsc() {
-		return isAsc;
-	}
-
-	public void setIsAsc(boolean isAsc) {
-		this.isAsc = isAsc;
-	}
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
 	public int getOffset() {
-		int page = this.page == 0 ? 1 : this.page;
-		offset = (page - 1 )* this.pageSize;
-		return offset;
+		return this.pageIndex != null && this.pageIndex > 1 ? (this.pageIndex - 1) * this.pageSize : 0;
+
 	}
 }

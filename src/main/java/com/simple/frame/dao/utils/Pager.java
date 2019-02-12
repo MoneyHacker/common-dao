@@ -1,5 +1,9 @@
 package com.simple.frame.dao.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,6 +12,9 @@ import java.util.List;
  * 
  */
 @SuppressWarnings("serial")
+@Getter
+@Setter
+@ToString
 public class Pager<T> implements Serializable {
 
 	private static int DEFAULT_PAGE_SIZE = 20;
@@ -35,7 +42,7 @@ public class Pager<T> implements Serializable {
 	/**
 	 * 跳转页数
 	 */
-	private int pageNo;
+	private int pageIndex;
 
 	/**
 	 * 是否有上一页
@@ -52,8 +59,8 @@ public class Pager<T> implements Serializable {
 	 */
 	private int currentNumber;
 
-	public Pager(int pageNo, int rowCount) {
-		this.pageNo = pageNo;
+	public Pager(int pageIndex, int rowCount) {
+		this.pageIndex = pageIndex;
 		this.rowCount = rowCount;
 		this.pageCount = getTotalPageCount();
 		refresh();
@@ -62,8 +69,8 @@ public class Pager<T> implements Serializable {
 	/**
 	 * 构造方法
 	 */
-	public Pager(int pageNo, int pageSize, int rowCount) {
-		this.pageNo = pageNo;
+	public Pager(int pageIndex, int pageSize, int rowCount) {
+		this.pageIndex = pageIndex;
 		this.pageSize = pageSize;
 		this.rowCount = rowCount;
 		this.pageCount = getTotalPageCount();
@@ -73,8 +80,8 @@ public class Pager<T> implements Serializable {
 	/**
 	 * 
 	 */
-	public Pager(int pageNo, int pageSize, int rowCount, List<T> data) {
-		this.pageNo = pageNo;
+	public Pager(int pageIndex, int pageSize, int rowCount, List<T> data) {
+		this.pageIndex = pageIndex;
 		this.pageSize = pageSize;
 		this.rowCount = rowCount;
 		this.pageCount = getTotalPageCount();
@@ -86,10 +93,11 @@ public class Pager<T> implements Serializable {
 	 * 取总页数
 	 */
 	private final int getTotalPageCount() {
-		if (rowCount % pageSize == 0)
+		if (rowCount % pageSize == 0) {
 			return rowCount / pageSize;
-		else
+		}  else {
 			return rowCount / pageSize + 1;
+		}
 	}
 
 	/**
@@ -99,10 +107,10 @@ public class Pager<T> implements Serializable {
 		if (pageCount <= 1) {
 			hasPrevious = false;
 			hasNext = false;
-		} else if (pageNo == 1) {
+		} else if (pageIndex == 1) {
 			hasPrevious = false;
 			hasNext = true;
-		} else if (pageNo == pageCount) {
+		} else if (pageIndex == pageCount) {
 			hasPrevious = true;
 			hasNext = false;
 		} else {
@@ -111,12 +119,6 @@ public class Pager<T> implements Serializable {
 		}
 	}
 
-	/**
-	 * 取每页数据数
-	 */
-	public int getPageSize() {
-		return pageSize;
-	}
 
 	/**
 	 * 取当前页中的记录.
@@ -125,53 +127,12 @@ public class Pager<T> implements Serializable {
 		return data;
 	}
 
-	public List<T> getData() {
-		return data;
-	}
 
-	public void setData(List<T> data) {
-		this.data = data;
-	}
 
-	public int getRowCount() {
-		return rowCount;
-	}
 
-	public void setRowCount(int rowCount) {
-		this.rowCount = rowCount;
-	}
 
-	public int getPageCount() {
-		return pageCount;
-	}
 
-	public void setPageCount(int pageCount) {
-		this.pageCount = pageCount;
-	}
 
-	public int getPageNo() {
-		return pageNo;
-	}
-
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
-
-	public boolean isHasPrevious() {
-		return hasPrevious;
-	}
-
-	public void setHasPrevious(boolean hasPrevious) {
-		this.hasPrevious = hasPrevious;
-	}
-
-	public boolean isHasNext() {
-		return hasNext;
-	}
-
-	public void setHasNext(boolean hasNext) {
-		this.hasNext = hasNext;
-	}
 
 	public int getCurrentNumber() {
 		if(data != null){
@@ -192,6 +153,6 @@ public class Pager<T> implements Serializable {
 	 * 获取跳转页第�?��数据在数据集的位�?
 	 */
 	public int getStartOfPage() {
-		return (pageNo - 1) * pageSize;
+		return (pageIndex - 1) * pageSize;
 	}
 }

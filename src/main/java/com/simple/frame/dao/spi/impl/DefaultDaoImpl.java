@@ -222,7 +222,7 @@ public abstract class DefaultDaoImpl implements ICommonDao {
     private <T> Pager<T> getPagerObjs(Object params, Query query, String countSql, String dataSql) {
         int count = getSqlSession(false).selectOne(countSql, params);
         List<T> datas = getSqlSession(false).selectList(dataSql, params, new RowBounds(query.getOffset(), query.getPageSize()));
-        Pager<T> pager = new Pager<T>(query.getPage(), query.getPageSize(), count, datas);
+        Pager<T> pager = new Pager<T>(query.getPageIndex(), query.getPageSize(), count, datas);
         return pager;
     }
 
@@ -242,7 +242,7 @@ public abstract class DefaultDaoImpl implements ICommonDao {
         List<T> dataList= getSqlSession(true).selectList(dataSql, params, new RowBounds(query.getOffset(), query.getPageSize()));
         Pager<T> pager = null;
         if (count > 0) {
-            pager = new Pager(query.getPage(), query.getPageSize(), count, dataList);
+            pager = new Pager(query.getPageIndex(), query.getPageSize(), count, dataList);
         } else {
             pager = new Pager(1, query.getPageSize(), 0);
         }
