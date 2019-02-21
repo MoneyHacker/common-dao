@@ -1,11 +1,8 @@
 package com.simple.frame.dao.spi;
 
-
 import com.simple.frame.dao.utils.Id;
 import com.simple.frame.dao.utils.Pager;
 import com.simple.frame.dao.utils.Query;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.util.List;
 import java.util.Map;
 

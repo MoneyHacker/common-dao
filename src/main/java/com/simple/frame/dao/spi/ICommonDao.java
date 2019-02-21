@@ -15,9 +15,9 @@ public interface ICommonDao extends IMapper {
 
     void setJdbcTemplate(JdbcTemplate jdbcTemplate);
 
-    void setJdbcTemplateQuery(JdbcTemplate jdbcTemplate);
+    void setQueryJdbcTemplate(JdbcTemplate jdbcTemplate);
 
     void setSqlSession(SqlSessionTemplate sessionTemplate);
 
-    void setSqlSessionQuery(SqlSessionTemplate sessionTemplate);
+    void setQuerySqlSession(SqlSessionTemplate sessionTemplate);
 }
