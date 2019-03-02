@@ -19,9 +19,8 @@
     }
 
 # 一 交流(QQ群：51567067) 支持
-![微信](https://github.com/MoneyHacker/simple/blob/master/simple_wx.jpg)
-![支付宝](https://github.com/MoneyHacker/simple/blob/master/simple_zfb.png)
-<img src="https://github.com/MoneyHacker/simple/blob/master/simple_zfb.png" alt="支付宝" width="100px" height="100px"/>
+<img src="https://github.com/MoneyHacker/simple/blob/master/simple_wx.png" alt="微信" width="200px" height="200px"/>
+<img src="https://github.com/MoneyHacker/simple/blob/master/simple_zfb.png" alt="支付宝" width="200px" height="200px"/>
 
 
 
