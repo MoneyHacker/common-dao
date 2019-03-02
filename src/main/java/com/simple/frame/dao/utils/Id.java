@@ -1,7 +1,7 @@
 package com.simple.frame.dao.utils;
 
 /**
- * @author xiang.lv@hnari.com
+ * @author moneyhacker@163.com
  * @date Create in 18:09 2017/11/13
  * @description 查询符合条件的表的最大id和最小id
  **/

@@ -13,9 +13,9 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
- * Created by lvxiang@ganji.com 2019/1/21  12:08
+ * Created by moneyhacker@163.com 2019/1/21  12:08
  *
- * @author <a href="mailto:lvxiang@ganji.com">simple</a>
+ * @author <a href="mailto:moneyhacker@163.com">simple</a>
  */
 @Intercepts({@Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})})
 public class OffSetLimitInterceptor implements Interceptor, Serializable {

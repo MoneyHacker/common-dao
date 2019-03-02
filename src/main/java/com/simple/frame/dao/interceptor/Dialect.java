@@ -14,14 +14,6 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 
 import java.util.*;
 
-/**
- * 类似hibernate的Dialect,但只精简出分页部分
- * @author badqiu
- * @author miemiedev
- */
-/**
- * Created by yangjiachang on 2016/9/23.
- */
 public interface Dialect {
 
     /**

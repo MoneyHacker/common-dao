@@ -11,7 +11,7 @@ import com.simple.frame.dao.utils.ParameterUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author xiang.lv@hnari.com
+ * @author moneyhacker@163.com
  * @date Create in 11:01 2017/11/14
  * @description
  **/

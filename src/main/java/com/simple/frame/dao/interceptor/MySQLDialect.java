@@ -3,9 +3,9 @@ package com.simple.frame.dao.interceptor;
 import com.simple.frame.dao.utils.OrderType;
 /**
  * 
- *Created by lvxiang@ganji.com 2019/1/21  11:00
+ *Created by moneyhacker@163.com 2019/1/21  11:00
  *
- *@author <a href="mailto:lvxiang@ganji.com">simple</a>
+ *@author <a href="mailto:moneyhacker@163.com">simple</a>
  */
 public class MySQLDialect implements Dialect {
     @Override
