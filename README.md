@@ -1,4 +1,4 @@
-# 一 通用Dao组件,一个链接可以查询多个数据表
+# 一 通用Dao组件,Common-dao, Mybaits 一个链接可以查询多个数据表
 - 每张表只需要生成Bean和xml文件即可
 - 一个Dao可以查询同一个链接池关联数据库下所有表
 - Bean 及 xml快速生成,可参考项目<a href="https://github.com/MoneyHacker/generator">generator</a>
