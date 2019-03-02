@@ -1,7 +1,7 @@
 /**
- * Created by lvxiang@ganji.com 2018/12/5 14:14
+ * Created by moneyhacker@163.com 2018/12/5 14:14
  *
- * @author <a href="mailto:lvxiang@ganji.com">simple</a>
+ * @author <a href="mailto:moneyhacker@163.com">simple</a>
  */
 import com.simple.frame.dao.spi.ICommonDao;
 import com.simple.module.SysDict;
