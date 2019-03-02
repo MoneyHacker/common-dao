@@ -17,3 +17,10 @@
         List<SysUser> userList =  commonDao.getListBySqlId(SysUser.class, "selectByIds","list", Arrays.asList(1L,2L));
         Assert.assertNotNull(userList);
     }
+
+# 一 交流(QQ群：51567067) 支持
+https://github.com/MoneyHacker/simple/blob/master/simple_wx.jpg
+
+https://github.com/MoneyHacker/simple/blob/master/simple_zfb.jpg
+
+
