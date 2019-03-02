@@ -1,8 +1,8 @@
 # 一 通用Dao组件,一个链接可以查询多个数据表
 - 每张表只需要生成Bean和xml文件即可
 - 一个Dao可以查询同一个链接池关联数据库下所有表
-
-# 一 示例,具体其它方法可以查看ICommonDao接口和测试类DaoTester
+- Bean 及 xml快速生成,可参考项目<a href="https://github.com/MoneyHacker/generator">generator</a>
+# 二示例,具体其它方法可以查看ICommonDao接口和测试类DaoTester
 
     @Resource
     private ICommonDao commonDao;
@@ -18,7 +18,7 @@
         Assert.assertNotNull(userList);
     }
 
-# 一 交流(QQ群：51567067) 支持
+# 三 交流(QQ群：51567067) 支持
 <img src="https://github.com/MoneyHacker/simple/blob/master/simple_wx.jpg" alt="微信" width="300px" height="300px"/><img src="https://github.com/MoneyHacker/simple/blob/master/simple_zfb.png" alt="支付宝" width="300px" height="300px"/>
 
 
