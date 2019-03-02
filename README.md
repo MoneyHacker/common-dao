@@ -2,7 +2,7 @@
 - 每张表只需要生成Bean和xml文件即可
 - 一个Dao可以查询同一个链接池关联数据库下所有表
 
-# 一 示例,具体其它方法可以查看ICommonDao接口
+# 一 示例,具体其它方法可以查看ICommonDao接口和测试类DaoTester
 
     @Resource
     private ICommonDao commonDao;

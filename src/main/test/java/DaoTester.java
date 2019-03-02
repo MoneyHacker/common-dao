@@ -47,6 +47,10 @@ public class DaoTester {
         Assert.assertNotNull(userList);
 
     }
+
+    /**
+     * 查询另一张表
+     */
     @Test
     public void testDict() {
         SysDict user = commonDao.get(1L, SysDict.class);
