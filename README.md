@@ -1,18 +1,11 @@
-通用Dao组件
-一个链接可以查询多个数据表
-详情请查看示例
-具体暴露接口,可查看IMapper类,可使用内置方法,也可添加自定义SQL
+# 一 通用Dao组件,一个链接可以查询多个数据表
+- 每张表只需要生成Bean和xml文件即可
+- 一个Dao可以查询同一个链接池关联数据库下所有表
 
+# 一 示例,具体其它方法可以查看ICommonDao接口
 
- /**
-     * 一个链接可以查所有表
-     */
     @Resource
     private ICommonDao commonDao;
-
-    /**
-     * 其它CURD方法差不多,具体可以看IMapper接口
-     */
     @Test
     public void test() {
         SysUser user = commonDao.get(1L, SysUser.class);
@@ -23,5 +16,4 @@
         //根据自己定义sql查询,sqlId是在xml的sqlId
         List<SysUser> userList =  commonDao.getListBySqlId(SysUser.class, "selectByIds","list", Arrays.asList(1L,2L));
         Assert.assertNotNull(userList);
-
     }
